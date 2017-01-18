@@ -1,6 +1,6 @@
 function [lambda,No_of_iterations] = linesearch(func,x,d)
     a = 0;
-    b = find_end_interval(func, x, d)
+    b = find_end_interval(func, x, d);
     alpha = (sqrt(5)-1)/2;
     lambda = a + (1-alpha)*(b-a);
     mu = a + alpha*(b-a);
