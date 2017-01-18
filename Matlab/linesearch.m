@@ -7,7 +7,9 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
     f = @(y) func(x+d.*y);
     No_of_iterations = 0;
     tol = 1e-60;
-    while b-a > tol
+    fl = f(lambda);
+    fm = f(mu);
+    while abs(fl-fm) > tol
         No_of_iterations = No_of_iterations + 1;
         fl = f(lambda);
         fm = f(mu);
