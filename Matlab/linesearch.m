@@ -1,17 +1,16 @@
 function [lambda,No_of_iterations] = linesearch(func,x,d)
     a = 0;
-    %b = 1e-57;
-    b = find_end_interval(func, x, d);
+    b = find_end_interval(func, x, d)
     alpha = (sqrt(5)-1)/2;
     lambda = a + (1-alpha)*(b-a);
     mu = a + alpha*(b-a);
-    f = @(y) func(x+d.*y) 
+    f = @(y) func(x+d.*y);
     No_of_iterations = 0;
-    tol = 10*eps;
+    tol = 1e-60;
     while b-a > tol
         No_of_iterations = No_of_iterations + 1;
-        fl = f(lambda)
-        fm = f(mu)
+        fl = f(lambda);
+        fm = f(mu);
         if fl>fm
             a = lambda;
             lambda = mu;
