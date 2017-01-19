@@ -19,3 +19,14 @@ toc
 tic
 [lb, k] = linesearch(@rosenbrock,[200;200], [-3.1840*1e9; 0.0080*1e9])
 toc
+%%
+
+d = [786.5257; 27.4596];
+x = [-13.7831; 189.8378];
+f = @(y) rosenbrock(x + y*d);
+
+lambdas = 0.026 + [-0.03:0.001:0.02];
+for i = lambdas
+    plot(i, f(i), '+')
+    hold on
+end

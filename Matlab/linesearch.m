@@ -1,28 +1,41 @@
 function [lambda,No_of_iterations] = linesearch(func,x,d)
-    %a = find_start_interval(func, x, d);
-    a = 0;
-    %b = find_end_interval(func, x, d);
-    b = 10;
+    a = find_start_interval(func, x, d);
+    %a = 0;
+    b = find_end_interval(func, x, d);
+    %b = 10;
     alpha = (sqrt(5)-1)/2;
     lambda = a + (1-alpha)*(b-a);
     mu = a + alpha*(b-a);
     f = @(y) func(x+d*y);
     No_of_iterations = 0;
-    tol = 1e-15;
+    tol = 1e-8;
     fl = f(lambda);
     fm = f(mu);
-    %while abs(fl-fm) > tol%abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
-    for ccc = 1:5
+    while abs(f(a)-f(b)) > tol%abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
         No_of_iterations = No_of_iterations + 1;
+        if fl == fm
+            disp('fl == fm')
+        end
+        aold = a;
         if fl>fm
             a = lambda;
         else
             b = mu;
-        end        
+        end
+        if a > 0 && f(a) > f(0)
+            disp('wtf')
+            b = mu;
+            mu = lambda;
+            lambda = a;
+            a = aold;
+        end
+        
         mu = a + alpha*(b-a);
         lambda = a + (1-alpha)*(b-a);
         fm = f(mu);
         fl = f(lambda);
+        
+        
         
         if isnan(f(lambda)) || isinf(f(lambda)) || isnan(f(mu)) || isinf(f(mu))
             error('inf?');
@@ -30,10 +43,11 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
         if lambda > mu
             error('lambda > mu?')
         end
-        fprintf('a:%1.2E, b:%1.2E, %1.2E\n', a, b, (a+b)/2)
+        %fprintf('a-l: %1.2E, l-m: %1.2E, m-b: %1.2E, a-b: %1.2E\n', a-lambda, lambda-mu, mu-b, a-b) 
+        %fprintf('a:%1.2E, b:%1.2E, %1.2E\n', a, b, (a+b)/2)
     end
     
-    v = [0, a, lambda, mu, b, (a+b)/2]; % Select lowest function value
+    v = [a, lambda, mu, b, (a+b)/2]; % Select lowest function value
     mins = zeros(size(v));
     for kk = 1:length(v)
         mins(kk) = f(v(kk));

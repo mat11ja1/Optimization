@@ -14,8 +14,11 @@ while cont
             if isnan(d) | isinf(d)
                error('d is nan/inf') 
             end
-            %[lambda, lsi] = linesearch(f,y,d);
-            [lambda, lsi] = adamlinesearch(f,y,d);
+            [lambda, lsi] = linesearch(f,y,d);
+            %[lambda, lsi] = adamlinesearch(f,y,d);
+            if lambda == 0
+               1 
+            end
             yold = y;
             y = y + lambda*d;
 
