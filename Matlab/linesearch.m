@@ -9,8 +9,7 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
     tol = 1e-8;
     fl = f(lambda);
     fm = f(mu);
-    nor = abs(b-a);
-    while abs(f(a)-f(b)) > tol %&& abs(b-a)/nor > tol   %abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
+    while abs(f(a)-f(b)) > tol && abs(f((a+b)/2)-(f(a)+f(b))/2) > tol   %abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
         No_of_iterations = No_of_iterations + 1;
         if fl == fm
             disp('fl == fm')
