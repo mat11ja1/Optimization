@@ -1,29 +1,17 @@
 function [lambda,No_of_iterations] = linesearch(func,x,d)
-<<<<<<< HEAD
     a = find_start_interval(func, x, d);
     %a = 0;
     b = find_end_interval(func, x, d);
     %b = 10;
-=======
-    a = find_start_interval(func, x, d)
-    b = find_end_interval(func, x, d)
->>>>>>> 8f9f71889f170106ada441028f9a2694cf00fc3d
     alpha = (sqrt(5)-1)/2;
     lambda = a + (1-alpha)*(b-a);
     mu = a + alpha*(b-a);
     f = @(y) func(x+d*y);
     No_of_iterations = 0;
-<<<<<<< HEAD
     tol = 1e-8;
     fl = f(lambda);
     fm = f(mu);
     while abs(f(a)-f(b)) > tol%abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
-=======
-    tol = 1e-60;
-    fl = f(lambda);
-    fm = f(mu);
-    while abs(b-a) > tol
->>>>>>> 8f9f71889f170106ada441028f9a2694cf00fc3d
         No_of_iterations = No_of_iterations + 1;
         if fl == fm
             disp('fl == fm')
@@ -79,7 +67,6 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
         end
         error('Bad job of the line search!')
     end
-<<<<<<< HEAD
 end
 function b = find_end_interval(func, x, d)
     b = 10;
@@ -103,24 +90,4 @@ function a = find_start_interval(func, x, d)
     while isinf(func(x+a*d)) && a < -1e-100
         a = a / 2;
     end
-=======
-    a
-    b
-    lambda = (a+b)/2;    
-    if isnan(func(x+lambda*d)) || func(x+lambda*d)>func(x)
-     error('Bad job of the line search!')
-    end
-end
-function b = find_end_interval(func, x, d)
-    b = 10^58;
-    while isinf(func(x+b*d))
-        b = b / 2;
-    end  
-end
-function a = find_start_interval(func, x, d)
-    a = -10^58;
-    while isinf(func(x+a*d))
-        a = a / 2;
-    end  
->>>>>>> 8f9f71889f170106ada441028f9a2694cf00fc3d
 end
