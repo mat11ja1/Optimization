@@ -1,8 +1,6 @@
 function [lambda,No_of_iterations] = linesearch(func,x,d)
-    a = find_start_interval(func, x, d);
-    %a = 0;
-    b = find_end_interval(func, x, d);
-    %b = 10;
+    a = find_interval(func, x, d, -10);
+    b = find_interval(func, x, d, 10);
     alpha = (sqrt(5)-1)/2;
     lambda = a + (1-alpha)*(b-a);
     mu = a + alpha*(b-a);
@@ -11,7 +9,8 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
     tol = 1e-8;
     fl = f(lambda);
     fm = f(mu);
-    while abs(f(a)-f(b)) > tol%abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
+    nor = abs(b-a);
+    while abs(f(a)-f(b)) > tol %&& abs(b-a)/nor > tol   %abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
         No_of_iterations = No_of_iterations + 1;
         if fl == fm
             disp('fl == fm')
@@ -34,9 +33,7 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
         lambda = a + (1-alpha)*(b-a);
         fm = f(mu);
         fl = f(lambda);
-        
-        
-        
+
         if isnan(f(lambda)) || isinf(f(lambda)) || isnan(f(mu)) || isinf(f(mu))
             error('inf?');
         end
@@ -68,26 +65,19 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
         error('Bad job of the line search!')
     end
 end
-function b = find_end_interval(func, x, d)
-    b = 10;
+function p = find_interval(func, x, d, p)
     while 1
-        if isinf(func(x+b*d)) || isnan(func(x+b*d))
-            b = b / 10;
+        if isinf(func(x+p*d)) || isnan(func(x+p*d))
+            p = p / 10;
         else
-            bold = b;
-            b = b * 2;
-            if ~(isinf(func(x+b*d)) || isnan(func(x+b*d)))
-                if func(x+bold*d) < func(x+b*d)
-                    b = bold;
-                    break;
+            bold = p;
+            p = p * 2;
+            if ~(isinf(func(x+p*d)) || isnan(func(x+p*d)))
+                if func(x+bold*d) < func(x+p*d)
+                    %p = bold;
+                    break;                                           
                 end
             end
         end
-    end
-end
-function a = find_start_interval(func, x, d)
-    a = -1;
-    while isinf(func(x+a*d)) && a < -1e-100
-        a = a / 2;
     end
 end
