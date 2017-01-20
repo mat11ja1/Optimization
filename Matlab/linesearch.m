@@ -34,16 +34,16 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
         fl = f(lambda);
 
         if isnan(f(lambda)) || isinf(f(lambda)) || isnan(f(mu)) || isinf(f(mu))
-            error('Infinity or nan in lambda or mu');
+            warning('Infinity or nan in lambda or mu');
         end
         if lambda > mu
-            error('lambda > mu')
+            warning('lambda > mu')
         end
         %fprintf('a-l: %1.2E, l-m: %1.2E, m-b: %1.2E, a-b: %1.2E\n', a-lambda, lambda-mu, mu-b, a-b) 
         %fprintf('a:%1.2E, b:%1.2E, %1.2E\n', a, b, (a+b)/2)
     end
     
-    v = [a, lambda, mu, b, (a+b)/2]; % Select lowest function value
+    v = [0, a, lambda, mu, b, (a+b)/2]; % Select lowest function value
     mins = zeros(size(v));
     for kk = 1:length(v)
         mins(kk) = f(v(kk));
