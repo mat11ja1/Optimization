@@ -48,6 +48,9 @@ while cont
             fprintf(' \t%0.2f\n', y(2:end))
         end
     end
+    if norm(yo-y) < tol
+        cont = 0;
+    end
     if 0%(abs(f(y) - f(yo)) < tol) %| norm(delta_y) < tol
         disp('done!')
         cont = 0;
