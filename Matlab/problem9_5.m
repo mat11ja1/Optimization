@@ -3,6 +3,8 @@ p = @(x) 1/(3-x(1)-x(2))+1/(4+x(1)-2*x(2)) + 1e10*(max(0,x(1)+x(2)-3) + max(0,-x
 
 
 x = [0; 0];
-eps = [1 0.1 0.01 0.001 0.0001];
+eps = [1 0.1 0.01 0.001 0.0001 0.00001];
 %nonlinearmin(f,start,method,tol,printout)
-[y, fy] = solver(f, p, eps, x, 'DFP', 1e-6, 1)
+tic
+[y, fy] = solver(f, p, eps, x, 'BFGS', 1e-6, 1)
+toc
