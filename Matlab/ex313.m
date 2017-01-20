@@ -4,7 +4,7 @@ start = [-2;2;2;-1;-1];
 tol = 1e-6;
 eta = [0.01,0.1,1,10,100];
 
-[y,fy] = solver(f,a,eta,start,'BFGS',tol,1)
+[y,fy] = solver(f,a,eta,start,'BFGS',tol,1);
 
 
 
