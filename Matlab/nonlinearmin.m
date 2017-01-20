@@ -3,7 +3,7 @@ y = start;
 cont = 1;
 count = 0;
 while cont
-    fprintf('Outer-Iteration %d\n', count)
+    if printout; fprintf('Outer-Iteration %d\n', count); end
     cont2 = 1;
     yo = y;
     D = eye(length(start));
@@ -42,7 +42,7 @@ while cont
         end
     end
     if (norm(f(y) - f(yo)) < tol) || norm(yo-y) < tol
-        disp('done!')
+        if printout; disp('Within tolerance, done!'); end;
         cont = 0;
     end
     count = count + 1;
