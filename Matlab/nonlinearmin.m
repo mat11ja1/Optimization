@@ -1,4 +1,4 @@
-function y = nonlinearmin(f,start,method,tol,printout)
+function [y, fy] = nonlinearmin(f,start,method,tol,printout)
 y = start;
 cont = 1;
 count = 0;
@@ -47,7 +47,7 @@ while cont
     end
     count = count + 1;
 end
-f(y)
-count
+fy = f(y);
+%count
 end
 
