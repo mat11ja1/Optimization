@@ -1,9 +1,9 @@
-function [y, fy] = nonlinearmin(f,start,method,tol,printout)
+function [y, fy, count] = nonlinearmin(f,start,method,tol,printout)
 y = start;
 cont = 1;
 count = 0;
 while cont
-    if printout; fprintf('Outer-Iteration %d\n', count); end
+    if printout; fprintf('Outer-Iteration %d\n', count+1); end
     cont2 = 1;
     yo = y;
     D = eye(length(start));
@@ -44,10 +44,10 @@ while cont
     if (norm(f(y) - f(yo)) < tol) || norm(yo-y) < tol
         if printout; disp('Within tolerance, done!'); end;
         cont = 0;
+    else
+        count = count + 1;
     end
-    count = count + 1;
 end
 fy = f(y);
-%count
 end
 

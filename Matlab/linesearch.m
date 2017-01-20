@@ -12,7 +12,7 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
     while abs(f(a)-f(b)) > tol && abs(f((a+b)/2)-(f(a)+f(b))/2) > tol   %abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
         No_of_iterations = No_of_iterations + 1;
         if fl == fm
-            disp('fl == fm')
+            warning('fl == fm')
         end
         aold = a;
         if fl>fm
@@ -21,7 +21,7 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
             b = mu;
         end
         if a > 0 && f(a) > f(0)
-            disp('wtf')
+            warning('Not unimodal function')
             b = mu;
             mu = lambda;
             lambda = a;
@@ -34,10 +34,10 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
         fl = f(lambda);
 
         if isnan(f(lambda)) || isinf(f(lambda)) || isnan(f(mu)) || isinf(f(mu))
-            error('inf?');
+            error('Infinity or nan in lambda or mu');
         end
         if lambda > mu
-            error('lambda > mu?')
+            error('lambda > mu')
         end
         %fprintf('a-l: %1.2E, l-m: %1.2E, m-b: %1.2E, a-b: %1.2E\n', a-lambda, lambda-mu, mu-b, a-b) 
         %fprintf('a:%1.2E, b:%1.2E, %1.2E\n', a, b, (a+b)/2)
@@ -55,12 +55,6 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
     %    lambda = 0;
     %end
     if isnan(func(x+lambda*d)) || func(x+lambda*d)>func(x)
-        if isnan(func(x+lambda*d))
-           fprint('isnan!\n')
-        end
-        if func(x+lambda*d)>func(x)
-            fprintf('%2.2f > %2.2f\n', func(x+lambda*d), func(x))
-        end
         error('Bad job of the line search!')
     end
 end
