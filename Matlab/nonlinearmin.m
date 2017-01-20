@@ -1,4 +1,4 @@
-function nonlinearmin(f,start,method,tol,printout)
+function y = nonlinearmin(f,start,method,tol,printout)
 y = start;
 cont = 1;
 count = 0;
@@ -11,14 +11,7 @@ while cont
         if cont2 == 1
             gy = grad(f,y);
             d = -D*gy;
-            if isnan(d) || isinf(d)
-               error('d is nan/inf') 
-            end
             [lambda, lsi] = linesearch(f,y,d);
-            %[lambda, lsi] = adamlinesearch(f,y,d);
-%             if lambda == 0
-%                1 
-%             end
             yold = y;
             y = y + lambda*d;
 
@@ -34,7 +27,7 @@ while cont
             end
             delta_f = abs(f(yold) - f(y));
             %delta_y = abs(yold - y);
-            if isnan(D) || isinf(D)
+            if any(isnan(D(:))) || any(isinf(D(:)))
                cont2 = 0;
                %error('D is nan/inf') 
             end
@@ -48,9 +41,6 @@ while cont
             fprintf(' \t%0.2f\n', y(2:end))
         end
     end
-%     if norm(yo-y) < tol
-%         cont = 0;
-%     end
     if (norm(f(y) - f(yo)) < tol) || norm(yo-y) < tol
         disp('done!')
         cont = 0;
