@@ -1,3 +1,18 @@
+The problem formulation is
+\begin{equation*}
+\begin{aligned}
+& \underset{\mathbf{x}}{\text{minimize}}
+& & e^{x_1} + x_1^2 + x_1 x_2 \\
+& \text{subject to}
+& & 1/2 \cdot x_1 + x_2 = 1.
+\end{aligned}
+\end{equation*}
+
+and a penalty on the form $\alpha(x) = (1/2 \cdot x_1 + x_2 - 1)^2$ is chosen so that the function to be minimized is:
 $$
-1
+q(x,\mu) = e^{x_1} + x_1^2 + x_1 x_2 + \mu (1/2 \cdot x_1 + x_2 - 1)^2
 $$
+
+The optimal points found is $ \mathbf{x} = (-1.278, 1.639) $ using the tolerance 1e-6. with the objective function minimum $-0.183$. Both DFP and BFGS methods converge to the same points with a difference $< 10^{-9}$. The series $\mu$ used was $(1, 10, 100, 1000, 10000, 100000, 1000000)$. It normally takes two outer iterations for the algorithm to stop.
+
+The program execution converges to this feasible solution for a wide choice of $\mu$ in the penalty function. When $\mu$ is chosen small e.g $\mu = 0.1$ the solver runs into trouble, this is due to a minimum not existing. For large initial $\mu$ one can expect the conditioning of the problem cause problems for the solver, however, this problem is not very sensitive to the selection of $\mu$ and for DFP using a $\mu = 10^18$ and BFGS $\mu = 10^16$ still manages to converge. Selecting a larger initial $\mu$ also affects the number of outer iterations necessary for both methods.
