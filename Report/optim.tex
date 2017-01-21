@@ -62,8 +62,12 @@
 %----------------------------------------------------------------------------------------
 \section{Solver evaluation}
 \subsection{Consistency in the program behaviour}
+% Vet inte var vi ska lägga detta
+If the solution does not have a minimum there is a risk that the solver gets caught in an infinite loop. This can be solved by keeping track of the number of iterations performed in the line search or simply testing the function value in the limit to infinity, however we did not implement this. 
+
 \subsection{Comparison between DFP and BFGS}
 
+For problem 9.3 the only practical difference was the stable the algorithms used where to different large initial $\mu$.
 
 %----------------------------------------------------------------------------------------
 
