@@ -13,6 +13,35 @@ $$
 q(x,\mu) = e^{x_1} + x_1^2 + x_1 x_2 + \mu (1/2 \cdot x_1 + x_2 - 1)^2
 $$
 
+\subsubsection{Optimal points and function value}
 The optimal points found is $ \mathbf{x} = (-1.278, 1.639) $ using the tolerance 1e-6. with the objective function minimum $-0.183$. Both DFP and BFGS methods converge to the same points with a difference $< 10^{-9}$. The series $\mu$ used was $(1, 10, 100, 1000, 10000, 100000, 1000000)$. It normally takes two outer iterations for the algorithm to stop.
 
-The program execution converges to this feasible solution for a wide choice of $\mu$ in the penalty function. When $\mu$ is chosen small e.g $\mu = 0.1$ the solver runs into trouble, this is due to a minimum not existing. For large initial $\mu$ one can expect the conditioning of the problem cause problems for the solver, however, this problem is not very sensitive to the selection of $\mu$ and for DFP using a $\mu = 10^18$ and BFGS $\mu = 10^16$ still manages to converge. Selecting a larger initial $\mu$ also affects the number of outer iterations necessary for both methods.
+The program execution converges to this feasible solution for a wide choice of $\mu$ in the penalty function. When $\mu$ is chosen small e.g $\mu = 0.1$ the solver runs into trouble, this is due to a minimum not existing. For large initial $\mu$ one can expect the conditioning of the problem cause problems for the solver, however, this problem is not very sensitive to the selection of $\mu$ and for DFP using a $\mu = 10^{18}$ and BFGS $\mu = 10^{16}$ still manages to converge. Selecting a larger initial $\mu$ also affects the number of outer iterations necessary for both methods.
+
+\subsubsection{Typical output}
+Typical outputs for solving using BFGS with only $\mu = 100$
+
+\begin{verbatim}
+Outer-Iteration 1
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+1 	0.39 	0.89 	1.96 	2.57 	40 	3.98E-03
+ 	0.80
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+2 	-1.28 	1.88 	-0.19 	0.38 	25 	7.33E-01
+ 	1.65
+...
+...
+Outer-Iteration 3
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+1 	-1.28 	0.00 	-0.19 	0.00 	0 	0.00E+00
+ 	1.65
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+2 	-1.28 	0.00 	-0.19 	0.00 	0 	0.00E+00
+ 	1.65
+Within tolerance, done!
+Penalty/Barrier: 1.00E+02, function value: -1.87E-01
+Found point y: (-1.283, 1.648)
+Minimum value: -0.183
+Penalty at y: 3.97E-13
+Total iterations 3
+\end{verbatim}
