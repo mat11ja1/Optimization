@@ -1,0 +1,3 @@
+When minimizing the rosenbrock problem using the tolerance $tol=10^{-6}$, $[200,200]$ as a starting point and the DFP algorithm we need 51 outer iterations to find the minimum. The BFGS algorithm requires the same amount of iteration but yields a slightly lower functional value. Doing the minimization from the other side ($[-200,-200]$) yields a solution much faster, 14 iterations. Selecting initial point closer to the optimal point yields a solution faster, as expected. 
+
+When selecting $x_1=1$ and $x_2$ to be a negative value larger than 20 we see that after one iteration the algorithm stops regardless of chosen tolerance. We think this is due to the rosenbrock function and not that the algorithm misbehaves.
