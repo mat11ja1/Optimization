@@ -7,7 +7,7 @@ y = start;
 cont = 1; % continue outer loop
 count = 1; % count outer iterations
 while cont
-    if printout; fprintf('Outer-Iteration %d\n', count+1); end
+    if printout; fprintf('Outer-Iteration %d\n', count); end
     cont2 = 1;
     yo = y;
     D = eye(length(start));
