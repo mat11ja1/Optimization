@@ -11,9 +11,6 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
     fm = f(mu);
     while abs(f(a)-f(b)) > tol && abs(f((a+b)/2)-(f(a)+f(b))/2) > tol   %abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
         No_of_iterations = No_of_iterations + 1;
-        if fl == fm
-            warning('fl == fm')
-        end
         aold = a;
         if fl>fm
             a = lambda;
@@ -21,7 +18,6 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
             b = mu;
         end
         if a > 0 && f(a) > f(0)
-            warning('Not unimodal function')
             b = mu;
             mu = lambda;
             lambda = a;
