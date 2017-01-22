@@ -1,6 +1,9 @@
 
+The problem is formulated as 
+$$\min e^{x_1 x_2 x_3 x_4} $$ subject to $$x_1^2 + x_2^2 + x_3^2 + x_4^2 + x_5^2 = 10,\; x_2 x_3 = 5 x_4 x_5,\;x_1^3 + x_3^3 = -1$$
 \textbf{Write about problem formulation.}
-
+This yields the penalty function $$\alpha(\textbf{x}) = (x_1^2 + x_2^2 + x_3^2 + x_4^2 + x_5^2 - 10)^2+(x_2 x_3 - 5 x_4 x_5)^2 + (x_1^3 + x_3^3 +1)^2$$ and the auxiliary problem
+$$\min q(\textbf{x},\mu) =  e^{x_1 x_2 x_3 x_4} + \mu\alpha(\textbf{x})$$
 
 When searching for starting points with different outcomes we can find that by selecting 
 $$x_1=\left[
@@ -25,5 +28,5 @@ Both of the optimizations yield the same result with DFP and BFGS update schemes
 
 When lowering the tolerance one yields a similar result as when one extended the $\mu-$vector. The algorithm converges for many more starting points.
 
-Throughout the different It is clear that the BFGS requires quite a lot fewer outer iterations to complete the optimization algorithm. It is however, for some choices of $\mu$, more sensitive and finds one or more variables to be zero which leads to $f(x^*)=1$.
+When trying different starting points, tolerances and update schemes, it is clear that the BFGS update scheme requires quite a lot fewer outer iterations to complete the optimization algorithm. 
 
