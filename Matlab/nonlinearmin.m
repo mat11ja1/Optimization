@@ -1,7 +1,11 @@
 function [y, fy, count] = nonlinearmin(f,start,method,tol,printout)
+% Solves nonlinear problem using bfgs or dfp.
+% inputs as per manual
+% outputs minimum found point, minimum found function
+%   value and number of outer iterations
 y = start;
-cont = 1;
-count = 0;
+cont = 1; % continue outer loop
+count = 1; % count outer iterations
 while cont
     if printout; fprintf('Outer-Iteration %d\n', count+1); end
     cont2 = 1;
@@ -11,27 +15,25 @@ while cont
         if cont2 == 1
             gy = grad(f,y);
             d = -D*gy;
-            [lambda, lsi] = linesearch(f,y,d);
+            [lambda, lsi] = linesearch(f,y,d); % Perform linesearch
             yold = y;
             y = y + lambda*d;
 
             p = lambda*d;
-            gnew = grad(f,y); % for printout
+            gnew = grad(f,y); % for printout purposes
             q = gnew-gy;
             if strcmp(method,'DFP')
                 D = DFP(D,p,q);
             elseif strcmp(method,'BFGS')
                 D = bfgs(D,p,q);
             else
-                error('No method!')
+                error('No method specified!')
             end
             delta_f = abs(f(yold) - f(y));
-            %delta_y = abs(yold - y);
-            if any(isnan(D(:))) || any(isinf(D(:)))
-               cont2 = 0;
-               %error('D is nan/inf') 
+            if any(isnan(D(:))) || any(isinf(D(:))) % Sign of lambda or d equal to zero
+               cont2 = 0; 
             end
-            if (delta_f < tol) %| norm(delta_y) < tol
+            if (delta_f < tol) % Break inner loop if within tolerance
                cont2 = 0;
             end
         end
