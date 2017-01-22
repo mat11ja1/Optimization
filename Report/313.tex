@@ -1,1 +1,25 @@
-When searching for starting points with different outcomes we can find 
+When searching for starting points with different outcomes we can find that by selecting 
+$$x_1=\left[
+\begin{array}{c}
+-2\\2\\2\\-1\\-1
+\end{array}
+\right] x_2 =\left[
+\begin{array}{c}
+-2\\2\\-2\\-1\\1
+\end{array}
+\right] $$ we get the optimal points and values being $$x_1^*=
+\left[
+\begin{array}{c}
+-1.7172\\1.8272\\1.5957\\-0.7637\\-0.7637
+\end{array}
+\right], f(x_1^*)=0.0539, \;x_2^* = \left[
+\begin{array}{c}
+-0.6996\\ 2.7896\\-0.8703\\-0.6969\\0.6969
+\end{array}
+\right],f(x_2^*)=0.4383$$
+Both of the optimizations yield the same result with DFP and BFGS update schemes using tolerance $10^{-6}$. Since we can force the optimization to yield the same result when manipulating the $\mu-$vector we can assume that the optimization gets stuck on a local minima for $x_2$ with the given $\mu-$vector. The DFP and BFGS update schemes behave very similar for almost all different starting points. There are a few different ways of finding starting point which will work for the implementation of this optimization algorithm. By using the given starting point $x_1$ as base one can look at the constraints and make sure that the signs change equally for the second and third constraint. Some of these points gives the same optimal point and some does not. Most points are $x_1^*$ or $x_2^*$. 
+
+When lowering the tolerance one yields a similar result as when one extended the $\mu-$vector. The algorithm converges for many more starting points.
+
+Throughout the different 
+
