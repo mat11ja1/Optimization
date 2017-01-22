@@ -17,7 +17,7 @@ When using a sequence $\epsilon $= [1, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.0000
 How well the solver works and how many iterations it takes will of course depend on what tolerance and sequence of $\epsilon$ that is chosen. Starting with a low epsilon we have the risk of getting an ill-conditioned problem and with a large we may never converge. Both BFGS and DFP manages to get feasible solutions for starting epsilon as low as 1e-8 and as big as 1e5. Overall the result of the solver is satisfactory for both methods and the difference between them is small.
 
 \subsubsection{Typical output}
-
+Output for both BFGS and DFP while only using $\epsilon=0.0001$.
 \begin{verbatim}
 Outer-Iteration 1
 It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
