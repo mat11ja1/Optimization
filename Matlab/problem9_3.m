@@ -4,7 +4,7 @@ Additional printouts can be made by setting
 printout = 1.
 %}
 
-printout = 0;
+printout = 1;
 
 f = @(x) exp(x(1)) + x(1)^2 + x(1)*x(2);
 p = @(x) (1/2*x(1) + x(2) - 1).^2;
@@ -19,8 +19,9 @@ fprintf('Minimum value: %0.3f\n', f(y))
 fprintf('Penalty at y: %2.2E\n', p(y))
 fprintf('Total iterations %d\n\n', count)
 disp('BFGS')
-
+%%
 %mu = 1e16; % Largest possible start mu for BFGS
+mu = 100;
 [yl, fy, count] = solver(f, p, mu, x, 'BFGS', 1e-6, printout);
 fprintf('Found point y: (%0.3f, %0.3f)\n', yl(1), yl(2))
 fprintf('Minimum value: %0.3f\n', f(y)) 
