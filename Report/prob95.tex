@@ -1,0 +1,17 @@
+\subsection{Exercise 9.5}
+For exercise 9.5 in the book the problem is formulated as
+\begin{equation*}
+\begin{aligned}
+& \underset{\mathbf{x}}{\text{Minimize}}
+& & (x_1-5)^2 + (x_2-3)^2 \\
+& \text{subject to}
+& & x_1+x_2 \leq 3 \\
+&&& \text{-}x_1+2x_2 \leq 4.
+\end{aligned}
+\end{equation*}
+The barrier function is chosen as $\beta=\frac{1}{3-x_1-x_2}+\frac{1}{4+x_1-2x_2}$ and to hinder the line search from missing the barrier a term was added that becomes large for points outside of the domain. That gives us the auxiliary problem to be solved as minimizing
+$$ q_{\epsilon}= (x_1-5)^2 + (x_2-3)^2 + \epsilon(\frac{1}{3-x_1-x_2}+\frac{1}{4+x_1-2x_2})+10^{10}(max(0,x_1+x_2-3)+max(0,\text{-}x_1+2x_2-4)) $$.
+
+\subsubsection{Optimal points and function value}
+When using a sequence $\epsilon $= [1, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001], tolerance 1e-6 and starting point [0,0], the solver finds the optimal point [2.500, 0.500] with the functional value 12.502 for both the BFGS and DFP where the difference of the solutions is 4.170e-08 for the point and 7.578e-11 for the functional value, both methods takes 8 iterations. The real minimum lies at [2.5, 0.5] and both methods have an distance of around 3e-4 from this point. \\
+How well the solver works and how many iterations it takes will of course depend on what tolerance and sequence of $\epsilon$ that is chosen. Starting with a low epsilon we have the risk of getting an ill-conditioned problem and with a large we may never converge. Both BFGS and DFP manages to get feasible solutions for starting epsilon as low as 1e-8 and as big as 1e5. Overall the result of the solver is satisfactory for both methods and the difference between them is small.
