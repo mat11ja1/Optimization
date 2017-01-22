@@ -37,7 +37,9 @@
 %----------------------------------------------------------------------------------------
 \section{Code discussion}
 \subsection{Line search}
+\input{linesearch}
 \subsection{Stop conditions}
+\input{stoppingcriterion}
 %Både DFP, BFGS & linesearch
 
 
@@ -48,12 +50,14 @@
 \section{Problems}
 \subsection{Rosenbrock}
 \subsubsection{Optimal points and function value}
-\subsection{$\min e^{x_1 x_2 x_3 x_4}$ subject to $x_1^2 + x_2^2 + x_3^2 + x_4^2 + x_5^2 = 10$, $x_2 x_3 = 5 x_4 x_5 $, $x_1^3 + x_3^3 = -1$}
+\subsection{Problem from project description}
+\input{313}
 \subsubsection{Optimal points and function value}
 \subsection{Exercise 9.3}
 \input{prob93}
 \subsubsection{Optimal points and function value}
 \subsection{Exercise 9.5}
+\input{prob95}
 \subsubsection{Optimal points and function value}
 
 
@@ -62,12 +66,8 @@
 %----------------------------------------------------------------------------------------
 \section{Solver evaluation}
 \subsection{Consistency in the program behaviour}
-% Vet inte var vi ska lägga detta
-If the solution does not have a minimum there is a risk that the solver gets caught in an infinite loop. This can be solved by keeping track of the number of iterations performed in the line search or simply testing the function value in the limit to infinity, however we did not implement this. 
-
 \subsection{Comparison between DFP and BFGS}
 
-For problem 9.3 the only practical difference was the stable the algorithms used where to different large initial $\mu$.
 
 %----------------------------------------------------------------------------------------
 
