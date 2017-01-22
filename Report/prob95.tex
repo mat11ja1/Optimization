@@ -15,3 +15,59 @@ $$ q_{\epsilon}= (x_1-5)^2 + (x_2-3)^2 + \epsilon(\frac{1}{3-x_1-x_2}+\frac{1}{4
 \subsubsection{Optimal points and function value}
 When using a sequence $\epsilon $= [1, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001], tolerance 1e-6 and starting point [0,0], the solver finds the optimal point [2.500, 0.500] with the functional value 12.502 for both the BFGS and DFP where the difference of the solutions is 4.170e-08 for the point and 7.578e-11 for the functional value, both methods takes 8 iterations. The real minimum lies at [2.5, 0.5] and both methods have an distance of around 3e-4 from this point. \\
 How well the solver works and how many iterations it takes will of course depend on what tolerance and sequence of $\epsilon$ that is chosen. Starting with a low epsilon we have the risk of getting an ill-conditioned problem and with a large we may never converge. Both BFGS and DFP manages to get feasible solutions for starting epsilon as low as 1e-8 and as big as 1e5. Overall the result of the solver is satisfactory for both methods and the difference between them is small.
+
+\subsubsection{Typical output}
+
+\begin{verbatim}
+Outer-Iteration 1
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+1 	1.87 	2.18 	13.33 	1.82 	39 	1.87E-01
+ 	1.12
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+2 	2.23 	0.56 	12.99 	7.18 	27 	3.13E-01
+ 	0.69
+  
+...
+...
+
+Outer-Iteration 4
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+1 	2.50 	0.00 	12.54 	0.00 	12 	0.00E+00
+ 	0.50
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+2 	2.50 	0.00 	12.54 	0.00 	12 	0.00E+00
+ 	0.50
+Within tolerance, done!
+Penalty/Barrier: 1.00E-04, function value: 1.25E+01
+DFP
+Found point y: (2.498, 0.498)
+Minimum value: 12.522
+Penalty at y: 2.24E+02
+Total iterations 3
+
+BFGS
+Outer-Iteration 1
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+1 	1.87 	2.18 	13.33 	1.82 	39 	1.87E-01
+ 	1.12
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+
+...
+...
+
+Outer-Iteration 4
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+1 	2.50 	0.00 	12.54 	0.00 	12 	0.00E+00
+ 	0.50
+It 	x 	s.s 	f(x) 	|grad| 	l.s.i. 	lambda
+2 	2.50 	0.00 	12.54 	0.00 	12 	0.00E+00
+ 	0.50
+Within tolerance, done!
+Penalty/Barrier: 1.00E-04, function value: 1.25E+01
+Found point y: (2.498, 0.498)
+Minimum value: 12.522
+Penalty at y: 2.24E+02
+Total iterations 3
+
+Norm of diff in y: 5.672E-08, f(y): 2.738E-09
+\end{verbatim}
