@@ -6,7 +6,7 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
 % Output: lambda = optimal steplength
 %         No_of_iterations = number of iterations to find the optimum
 
-    a = find_interval(func, x, d, -10); % Starting point of the interval
+    a = 0;%find_interval(func, x, d, -10); % Starting point of the interval
     b = find_interval(func, x, d, 10); % End point of the interval
     alpha = (sqrt(5)-1)/2;
     lambda = a + (1-alpha)*(b-a); % Lambda for disecting the interval
