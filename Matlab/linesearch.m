@@ -6,7 +6,7 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
 % Output: lambda = optimal steplength
 %         No_of_iterations = number of iterations to find the optimum
 
-    a = 0;%find_interval(func, x, d, -10); % Starting point of the interval
+    a = 0; % Starting point of the interval
     b = find_interval(func, x, d, 10); % End point of the interval
     alpha = (sqrt(5)-1)/2;
     lambda = a + (1-alpha)*(b-a); % Lambda for disecting the interval
@@ -16,7 +16,7 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
     tol = 1e-8; % Tolerance
     fl = f(lambda);
     fm = f(mu);
-    while abs(f(a)-f(b)) > tol && abs(f((a+b)/2)-(f(a)+f(b))/2) > tol   %abs(fl-fm) > tol%%abs(b-a) > tol && abs(fl-fm) > tol %abs(fl-fm) > tol% || abs(b-a) > 1e-9        
+    while abs(f(a)-f(b)) > tol && abs(f((a+b)/2)-(f(a)+f(b))/2) > tol   % Stoping condition
         No_of_iterations = No_of_iterations + 1;
         aold = a;
         if fl>fm
@@ -57,7 +57,7 @@ function [lambda,No_of_iterations] = linesearch(func,x,d)
         error('Bad job of the line search!')
     end
 end
-function p = find_interval(func, x, d, p) % Finding starting points
+function p = find_interval(func, x, d, p) % Finding end point
     while 1
         if isinf(func(x+p*d)) || isnan(func(x+p*d)) % Check if acceptable
             p = p / 10;
